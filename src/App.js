@@ -37,6 +37,7 @@ class ButtonAppBar extends Component {
     this.state = {
       open: false,
       elections: [],
+      user: null,
     };
   }
 
@@ -46,7 +47,7 @@ class ButtonAppBar extends Component {
         this.setState({user});
         this.watchMyElections(user.uid);
       } else {
-        this.setState(this.defaultState);
+        this.setState({user: null, elections: []});
       }
     });
   }
@@ -82,7 +83,7 @@ class ButtonAppBar extends Component {
   logout = async () => {
     try {
       await auth.signOut();
-      this.setState(this.defaultState);
+      this.setState({user: null, elections: []});
     } catch (e) {
       // eslint-disable-next-line no-alert
       window.alert('logout failed');
